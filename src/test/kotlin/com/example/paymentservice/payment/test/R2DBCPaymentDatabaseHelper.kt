@@ -10,6 +10,7 @@ import org.springframework.transaction.reactive.TransactionalOperator
 import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import java.math.BigDecimal
+import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
 class R2DBCPaymentDatabaseHelper (
@@ -33,7 +34,7 @@ class R2DBCPaymentDatabaseHelper (
                         paymentKey = results.first()["payment_key"] as String?,
                         paymentType = if (results.first()["type"] != null) PaymentType.get(results.first()["type"] as String) else null,
                         paymentMethod = if (results.first()["method"] != null) PaymentMethod.valueOf(results.first()["method"] as String) else null,
-                        approvedAt = if (results.first()["approved_at"] != null) (results.first()["approved_at"] as ZonedDateTime).toLocalDateTime() else null,
+                        approvedAt = if (results.first()["approved_at"] != null) (results.first()["approved_at"] as LocalDateTime) else null,
                         isPaymentDone = ((results.first()["is_payment_done"] as Byte).toInt() == 1),
                         paymentOrders = results.map { result ->
                             PaymentOrder(

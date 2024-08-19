@@ -19,4 +19,17 @@ data class PaymentEvent (
     }
 
     fun isPaymentDone() = this.isPaymentDone
+
+    fun isSuccess(): Boolean {
+        return paymentOrders.all { it.paymentStatus == PaymentStatus.SUCCESS }
+    }
+
+    fun isFailure(): Boolean {
+        return paymentOrders.all { it.paymentStatus == PaymentStatus.FAILURE }
+    }
+
+    fun isUnknown(): Boolean {
+        return paymentOrders.all { it.paymentStatus == PaymentStatus.UNKNOWN }
+    }
+
 }

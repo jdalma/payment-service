@@ -14,3 +14,11 @@ PSP:
   toss:
     url: https://api.tosspayments.com
     secretKey: test_gsk_docs_OaPz8L5KdmQXkzRz3y47BMw6
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+        r2dbc: DEBUG
+        transaction: DEBUG
