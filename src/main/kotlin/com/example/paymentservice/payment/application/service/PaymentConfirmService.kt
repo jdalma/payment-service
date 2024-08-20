@@ -14,7 +14,8 @@ import reactor.core.publisher.Mono
 class PaymentConfirmService (
     private val paymentStatusUpdatePort: PaymentStatusUpdatePort,
     private val paymentValidationPort: PaymentValidationPort,
-    private val paymentExecutorPort: PaymentExecutorPort    // PSP 결제 승인 요청을 전달하는 책임
+    private val paymentExecutorPort: PaymentExecutorPort,    // PSP 결제 승인 요청을 전달하는 책임
+    private val paymentErrorHandler: PaymentErrorHandler
 ): PaymentConfirmUseCase {
 
     override fun confirm(command: PaymentConfirmCommand): Mono<PaymentConfirmationResult> {
@@ -33,5 +34,6 @@ class PaymentConfirmService (
                 ).thenReturn(it)
             }
             .map { PaymentConfirmationResult(status = it.paymentStatus(), failure = it.failure) }
+            .onErrorResume { paymentErrorHandler.handlePaymentConfirmationError(it, command) }
     }
 }
