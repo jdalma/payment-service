@@ -1,6 +1,6 @@
 package com.example.paymentservice.payment.adapter.out.persistent.repository
 
-import com.example.paymentservice.payment.adapter.out.util.MySQLDateTimeFormatter
+import com.example.paymentservice.payment.adapter.out.persistent.util.MySQLDateTimeFormatter
 import com.example.paymentservice.payment.domain.PaymentEvent
 import com.example.paymentservice.payment.domain.PaymentStatus
 import com.example.paymentservice.payment.domain.PendingPaymentEvent

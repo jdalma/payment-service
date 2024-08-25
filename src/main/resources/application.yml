@@ -22,3 +22,9 @@ logging:
         web: DEBUG
         r2dbc: DEBUG
         transaction: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bindings
